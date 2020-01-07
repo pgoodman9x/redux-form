@@ -1,24 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import './App.scss';
+import SignUp from './components/SignUp';
+import Login from './components/Login';
+import { useSelector } from 'react-redux'
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 
 function App() {
+  const userList = useSelector(state => state.users)
+  //Update session storage after get list from store
+  useEffect(() => {
+    if(userList.length > 0){
+      sessionStorage.setItem('userList', JSON.stringify(userList));
+      console.log(userList);
+    }
+  }, [userList])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  {/*     <Login /> */}
+      <SignUp />
     </div>
   );
 }
