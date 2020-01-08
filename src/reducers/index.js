@@ -1,18 +1,13 @@
-import * as types from '../constants/ActionType';
 
-const initialState = {
-    users: []
-}
+import { combineReducers } from 'redux'
+import userList from './userList'
+import showEditForm from './showEditForm'
+import languageList from './languageList'
 
-const reducer = (state = initialState, action) => {
-    switch(action.type){
-        case types.SIGN_UP:
-            return {
-                users: [...state.users,action.user] 
-            }
-        default: 
-            return state;
-    }
-}
+const myReducer = combineReducers({
+    users: userList,
+    showEditForm,
+    languageList
+})
 
-export default reducer;
+export default myReducer;
